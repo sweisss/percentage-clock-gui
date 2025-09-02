@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 
 
-PROGRESS_BAR_WIDTH = 500
+PROGRESS_BAR_WIDTH = 400
 
 
 class ProgressBarFrame(tk.Frame):

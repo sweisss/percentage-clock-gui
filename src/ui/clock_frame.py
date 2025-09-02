@@ -19,7 +19,7 @@ class ClockFrame(tk.Frame):
         super().__init__(**kwargs)
 
         # Frames
-        self.frm_percent_of_day = PercentOfDayFrame(master=self)
+        self.frm_percent_of_day = PercentOfDayFrame(master=self, text='Percent of Total Day (Midnight/Midnight)')
 
         self.set_layout()
         self.update_time_percentage()
