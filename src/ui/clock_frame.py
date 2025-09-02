@@ -7,10 +7,6 @@ from datetime import datetime
 from src.ui.percentage_frame import PercentageFrame
 
 
-SHIFT_START = '6:40:00'
-SHIFT_END = '14:40:00'
-
-
 def calculate_time_percentage_of_day():
     """
     Calculate the current time as a percentage of the total time of a day (Midnight/Midnight).
@@ -57,12 +53,16 @@ def calculate_percentage_of_time_range(start, end):
 
 
 class ClockFrame(tk.Frame):
-    def __init__(self, **kwargs):
+    def __init__(self, shift_range, **kwargs):
         super().__init__(**kwargs)
+
+        self.shift_start = shift_range[0]
+        self.shift_end = shift_range[1]
 
         # Frames
         self.frm_percent_of_total_day = PercentageFrame(master=self, text='Percent of Total Day (Midnight/Midnight)')
-        self.frm_percent_of_work_day = PercentageFrame(master=self, text=f'Percent of Work Day ({SHIFT_START}/{SHIFT_END})')
+        # self.frm_percent_of_work_day = PercentageFrame(master=self, text=f'Percent of Work Day ({SHIFT_START}/{SHIFT_END})')
+        self.frm_percent_of_work_day = PercentageFrame(master=self, text=f'Percent of Work Day ({self.shift_start}/{self.shift_end})')
 
         self.set_layout()
         self.update_time_percentage()
@@ -73,7 +73,7 @@ class ClockFrame(tk.Frame):
 
     def update_time_percentage(self):
         percentage_of_day = calculate_percentage_of_time_range('00:00:00', '23:59:59')
-        percentage_of_shift = calculate_percentage_of_time_range(SHIFT_START, SHIFT_END)
+        percentage_of_shift = calculate_percentage_of_time_range(self.shift_start, self.shift_end)
 
         self.frm_percent_of_total_day.update_time_percentage(percentage_of_day)
         self.frm_percent_of_work_day.update_time_percentage(percentage_of_shift)

@@ -12,10 +12,12 @@ APP_VERSION = '1.0'
 # ICON_FILE = ...
 STARTING_WINDOW_WIDTH = 600
 STARTING_WINDOW_HEIGHT = 175
+SHIFT_START = '6:40:00'
+SHIFT_END = '14:40:00'
 
 
 class App(tk.Tk):
-    def __init__(self):
+    def __init__(self, shift_range):
         super().__init__()
 
         self.style = ttk.Style()
@@ -30,7 +32,7 @@ class App(tk.Tk):
         self.window_height = STARTING_WINDOW_HEIGHT
         self.set_window_geometry()
 
-        self.main_window = MainFrame()
+        self.main_window = MainFrame(master=self, shift_range=shift_range)
 
     def set_window_geometry(self):
         screen_width = self.winfo_screenwidth()
@@ -47,5 +49,5 @@ class App(tk.Tk):
 
 
 if __name__ == '__main__':
-    app = App()
+    app = App(shift_range=(SHIFT_START, SHIFT_END))
     app.run()
