@@ -1,22 +1,27 @@
 """
 A small GUI app to display a decimal clock
 """
+import sys
+
 from src.ui.main_window import MainWindow
 
 
 APP_NAME = 'Decimal Clock'
-APP_VERSION = '1.1'
+APP_VERSION = '1.2'
 SHIFT_START = '6:40:00'
 SHIFT_LEN = 8
 
 
 class App:
     def __init__(self):
+        shift_start = sys.argv[1] if len(sys.argv) >= 2 else SHIFT_START
+        shift_len = int(sys.argv[2]) if len(sys.argv) == 3 else SHIFT_LEN
+
         self.main_window = MainWindow(
             app_name=APP_NAME,
             app_version=APP_VERSION,
-            shift_start=SHIFT_START,
-            shift_len=SHIFT_LEN
+            shift_start=shift_start,
+            shift_len=shift_len
         )
 
     def run(self):
