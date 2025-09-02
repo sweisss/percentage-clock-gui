@@ -10,7 +10,7 @@ class TimeDisplayFrame(tk.Frame):
         super().__init__(**kwargs)
 
         # Labels
-        self.lbl_time_percent = ttk.Label(master=self, text=f'time.percent%')
+        self.lbl_time_percent = ttk.Label(master=self, text=f'00.0000%')
 
         self.set_layout()
 

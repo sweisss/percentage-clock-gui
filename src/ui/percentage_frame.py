@@ -8,7 +8,7 @@ from src.ui.progress_bar_frame import ProgressBarFrame
 from src.ui.time_display_frame import TimeDisplayFrame
 
 
-class PercentOfDayFrame(ttk.LabelFrame):
+class PercentageFrame(ttk.LabelFrame):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
