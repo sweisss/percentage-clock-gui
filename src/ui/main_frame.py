@@ -3,7 +3,7 @@ The main frame of the app GUI, used to organize all sub-frames and UI features
 """
 import tkinter as tk
 
-from src.ui.time_display_frame import TimeDisplayFrame
+from src.ui.clock_frame import ClockFrame
 
 
 class MainFrame(tk.Frame):
@@ -11,10 +11,9 @@ class MainFrame(tk.Frame):
         super().__init__(**kwargs)
 
         # Frames
-        self.frm_time_readout = TimeDisplayFrame(master=self)
-        # self.frm_progress_bar = ...
+        self.frm_clock = ClockFrame(master=self)
 
         self.set_layout()
 
     def set_layout(self):
-        self.frm_time_readout.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
+        self.frm_clock.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
