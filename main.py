@@ -8,7 +8,7 @@ from src.ui.main_frame import MainFrame
 
 
 APP_NAME = 'Decimal Clock'
-APP_VERSION = '0.1'
+APP_VERSION = '1.0'
 # ICON_FILE = ...
 STARTING_WINDOW_WIDTH = 600
 STARTING_WINDOW_HEIGHT = 175
