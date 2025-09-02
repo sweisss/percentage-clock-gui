@@ -18,4 +18,4 @@ class TimeDisplayFrame(tk.Frame):
         self.lbl_time_percent.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
 
     def update_label_text(self, txt):
-        self.lbl_time_percent.configure(text=f'{txt:.4f}%')
+        self.lbl_time_percent.configure(text=f'{txt:.2f}%')
