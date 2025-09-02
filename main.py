@@ -4,12 +4,14 @@ A small GUI app to display a decimal clock
 import tkinter as tk
 from tkinter import ttk
 
+from src.ui.main_frame import MainFrame
+
 
 APP_NAME = 'Decimal Clock'
 APP_VERSION = '0.1'
 # ICON_FILE = ...
 STARTING_WINDOW_WIDTH = 600
-STARTING_WINDOW_HEIGHT = 300
+STARTING_WINDOW_HEIGHT = 100
 
 
 class App(tk.Tk):
@@ -28,6 +30,8 @@ class App(tk.Tk):
         self.window_height = STARTING_WINDOW_HEIGHT
         self.set_window_geometry()
 
+        self.main_window = MainFrame()
+
     def set_window_geometry(self):
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
@@ -38,6 +42,7 @@ class App(tk.Tk):
         self.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
     def run(self):
+        self.main_window.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
         self.mainloop()
 
 
