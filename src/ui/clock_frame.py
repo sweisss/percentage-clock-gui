@@ -2,9 +2,12 @@
 A frame to hold the tkinter clock widgets
 """
 import tkinter as tk
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from src.ui.percentage_frame import PercentageFrame
+
+
+DATETIME_FORMAT = '%H:%M:%S'
 
 
 def calculate_time_percentage_of_day():
@@ -38,7 +41,7 @@ def calculate_percentage_of_time_range(start, end):
     :param end:     String representing the end of the time range
     :return:        Float representing the percentage of the current time within the time range
     """
-    time_format = "%H:%M:%S"
+    time_format = DATETIME_FORMAT
     start_time = datetime.strptime(start, time_format)
     end_time = datetime.strptime(end, time_format)
 
@@ -53,11 +56,12 @@ def calculate_percentage_of_time_range(start, end):
 
 
 class ClockFrame(tk.Frame):
-    def __init__(self, shift_range, **kwargs):
+    def __init__(self, shift_start, shift_len, **kwargs):
         super().__init__(**kwargs)
 
-        self.shift_start = shift_range[0]
-        self.shift_end = shift_range[1]
+        self.shift_start = shift_start
+        self.shift_len = shift_len
+        self.shift_end = self.calculate_shift_end()
 
         # Frames
         self.frm_percent_of_total_day = PercentageFrame(master=self, text='Percent of Total Day (Midnight/Midnight)')
@@ -66,6 +70,11 @@ class ClockFrame(tk.Frame):
 
         self.set_layout()
         self.update_time_percentage()
+
+    def calculate_shift_end(self):
+        start_dt = datetime.strptime(self.shift_start, DATETIME_FORMAT)
+        end_dt = start_dt + timedelta(hours=self.shift_len)
+        return end_dt.strftime(DATETIME_FORMAT)
 
     def set_layout(self):
         self.frm_percent_of_total_day.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)

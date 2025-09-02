@@ -8,16 +8,16 @@ from src.ui.main_frame import MainFrame
 
 
 APP_NAME = 'Decimal Clock'
-APP_VERSION = '1.0'
+APP_VERSION = '1.1'
 # ICON_FILE = ...
 STARTING_WINDOW_WIDTH = 600
 STARTING_WINDOW_HEIGHT = 175
 SHIFT_START = '6:40:00'
-SHIFT_END = '14:40:00'
+SHIFT_LEN = 8
 
 
 class App(tk.Tk):
-    def __init__(self, shift_range):
+    def __init__(self, shift_start, shift_len):
         super().__init__()
 
         self.style = ttk.Style()
@@ -32,7 +32,7 @@ class App(tk.Tk):
         self.window_height = STARTING_WINDOW_HEIGHT
         self.set_window_geometry()
 
-        self.main_window = MainFrame(master=self, shift_range=shift_range)
+        self.main_window = MainFrame(master=self, shift_start=shift_start, shift_len=shift_len)
 
     def set_window_geometry(self):
         screen_width = self.winfo_screenwidth()
@@ -49,5 +49,5 @@ class App(tk.Tk):
 
 
 if __name__ == '__main__':
-    app = App(shift_range=(SHIFT_START, SHIFT_END))
+    app = App(shift_start=SHIFT_START, shift_len=SHIFT_LEN)
     app.run()
