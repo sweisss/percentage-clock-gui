@@ -26,10 +26,11 @@ class Toolbar(tk.Menu):
 
     def on_edit_window_close(self, event):
         if event.widget == event.widget.winfo_toplevel():
-            self.main_window.update_workday(
-                event.widget.updated_data.get('start_time'),
-                event.widget.updated_data.get('duration')
-            )
+            if event.widget.updated_data:
+                self.main_window.update_workday(
+                    event.widget.updated_data.get('start_time'),
+                    event.widget.updated_data.get('duration')
+                )
 
     def open_edit_workday_popup(self):
         edit_workday_window = EditWorkdayWindow(geometry=self.main_window.winfo_geometry())

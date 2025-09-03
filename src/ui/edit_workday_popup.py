@@ -36,7 +36,7 @@ class EditWorkdayWindow(tk.Toplevel):
         self.btn_cancel = tk.Button(
             master=self.frm_buttons,
             text='Cancel',
-            command=self.destroy
+            command=self.on_cancel
         )
 
         # Variable for stored data
@@ -44,6 +44,7 @@ class EditWorkdayWindow(tk.Toplevel):
 
         self.set_window_geometry(main_window_geometry=geometry)
         self.set_layout()
+        self.bind('<Return>', lambda e: self.on_save())
 
     def set_window_geometry(self, main_window_geometry=None, width=350, height=100):
         parent_geometry_parts = main_window_geometry.split('+')
@@ -69,7 +70,15 @@ class EditWorkdayWindow(tk.Toplevel):
         self.btn_save.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
         self.btn_cancel.grid(row=0, column=1, sticky='nsew', padx=5, pady=5)
 
-    def on_save(self):
-        self.updated_data.update({'start_time': f'{self.ent_start_time_hrs.get()}:{self.ent_start_time_mins.get()}:00'})
-        self.updated_data.update({'duration': float(self.ent_duration.get())})
+    def on_cancel(self):
+        self.updated_data.clear()
         self.destroy()
+
+    def on_save(self):
+        try:
+            self.updated_data.update({'start_time': f'{self.ent_start_time_hrs.get()}:{self.ent_start_time_mins.get()}:00'})
+            self.updated_data.update({'duration': float(self.ent_duration.get())})
+            self.destroy()
+        except ValueError as e:
+            self.updated_data.clear()
+            print(f'{e.__class__.__name__}: {e}')
