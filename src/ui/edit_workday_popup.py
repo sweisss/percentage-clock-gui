@@ -27,6 +27,18 @@ class EditWorkdayWindow(tk.Toplevel):
         self.ent_start_time_mins = tk.Entry(master=self.frm_entries, width=3)
         self.ent_duration = tk.Entry(master=self.frm_entries, width=3)
 
+        # Buttons
+        self.btn_save = tk.Button(
+            master=self.frm_buttons,
+            text='Save',
+            command=lambda: print('Save button was pressed')
+        )
+        self.btn_cancel = tk.Button(
+            master=self.frm_buttons,
+            text='Cancel',
+            command=lambda: print('Cancel button was pressed')
+        )
+
         self.set_window_geometry(main_window_geometry=geometry)
         self.set_layout()
 
@@ -50,7 +62,9 @@ class EditWorkdayWindow(tk.Toplevel):
         self.lbl_duration_title.grid(row=0, column=4, sticky='nsew', padx=(10, 0), pady=5)
         self.ent_duration.grid(row=0, column=5, sticky='nsew', padx=(0, 5), pady=5)
 
-        self.frm_entries.grid(row=2, column=0, sticky='nsew', padx=5, pady=5)
+        self.frm_buttons.grid(row=1, column=0, sticky='nsew', padx=5, pady=5)
+        self.btn_save.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
+        self.btn_cancel.grid(row=0, column=1, sticky='nsew', padx=5, pady=5)
 
     def close_window(self):
         self.destroy()
