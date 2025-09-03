@@ -3,6 +3,8 @@ A toolbar menu widget for the main window.
 """
 import tkinter as tk
 
+from src.ui.edit_workday_popup import EditWorkdayWindow
+
 
 class Toolbar(tk.Menu):
     def __init__(self, **kwargs):
@@ -22,11 +24,21 @@ class Toolbar(tk.Menu):
         self.add_cascade(label='File', menu=self.menu_file)
         self.menu_file.add_command(label='Exit', command=self.quit)
 
+    def on_edit_window_close(self, event):
+        print('Attempting to close the Edit window...')
+        if event.widget == event.widget.winfo_toplevel():
+            print(f'DEBUG: {event.widget = }. This is where we try to save the updates')
+
+    def open_edit_workday_popup(self):
+        print('Attempting to open the Edit window...')
+        edit_workday_window = EditWorkdayWindow(geometry=self.main_window.winfo_geometry())
+        edit_workday_window.bind('<Destroy>', self.on_edit_window_close)
+
     def set_edit_menu(self):
         self.add_cascade(label='Edit', menu=self.menu_edit)
         self.menu_edit.add_command(
             label='Edit Work Day',
-            command=lambda: print('No Edit command yet')
+            command=self.open_edit_workday_popup
         )
 
     def hide_toolbar(self):
