@@ -65,7 +65,10 @@ class ClockFrame(tk.Frame):
 
         # Frames
         self.frm_percent_of_total_day = PercentageFrame(master=self, text='Percent of Total Day (Midnight/Midnight)')
-        self.frm_percent_of_work_day = PercentageFrame(master=self, text=f'Percent of Work Day ({self.shift_start}/{self.shift_end})')
+        self.frm_percent_of_work_day = PercentageFrame(
+            master=self,
+            text=f'Percent of Work Day ({self.shift_start.rpartition(':')[0]}/{self.shift_end.rpartition(':')[0]})'
+        )
 
         self.set_layout()
         self.update_time_percentage()
