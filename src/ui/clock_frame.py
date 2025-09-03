@@ -60,22 +60,27 @@ class ClockFrame(tk.Frame):
         super().__init__(**kwargs)
 
         self.shift_start = shift_start
-        self.shift_len = shift_len
-        self.shift_end = self.calculate_shift_end()
+        self.shift_end = self.calculate_shift_end(shift_len)
 
         # Frames
         self.frm_percent_of_total_day = PercentageFrame(master=self, text='Percent of Total Day (Midnight/Midnight)')
         self.frm_percent_of_work_day = PercentageFrame(
             master=self,
-            text=f'Percent of Work Day ({self.shift_start.rpartition(':')[0]}/{self.shift_end.rpartition(':')[0]})'
+            text=''
         )
 
         self.set_layout()
         self.update_time_percentage()
+        self.set_workday_frame_title()
 
-    def calculate_shift_end(self):
+    def set_workday_frame_title(self):
+        self.frm_percent_of_work_day.configure(
+            text=f'Percent of Work Day ({self.shift_start.rpartition(':')[0]}/{self.shift_end.rpartition(':')[0]})'
+        )
+
+    def calculate_shift_end(self, shift_len):
         start_dt = datetime.strptime(self.shift_start, DATETIME_FORMAT)
-        end_dt = start_dt + timedelta(hours=self.shift_len)
+        end_dt = start_dt + timedelta(hours=shift_len)
         return end_dt.strftime(DATETIME_FORMAT)
 
     def set_layout(self):
@@ -89,3 +94,8 @@ class ClockFrame(tk.Frame):
         self.frm_percent_of_total_day.update_time_percentage(percentage_of_day)
         self.frm_percent_of_work_day.update_time_percentage(percentage_of_shift)
         self.after(1000, self.update_time_percentage)
+
+    def update_workday(self, shift_start, shift_len):
+        self.shift_start = shift_start
+        self.shift_end = self.calculate_shift_end(shift_len)
+        self.set_workday_frame_title()

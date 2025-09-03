@@ -31,13 +31,16 @@ class EditWorkdayWindow(tk.Toplevel):
         self.btn_save = tk.Button(
             master=self.frm_buttons,
             text='Save',
-            command=lambda: print('Save button was pressed')
+            command=self.on_save
         )
         self.btn_cancel = tk.Button(
             master=self.frm_buttons,
             text='Cancel',
-            command=lambda: print('Cancel button was pressed')
+            command=self.destroy
         )
+
+        # Variable for stored data
+        self.updated_data = {}
 
         self.set_window_geometry(main_window_geometry=geometry)
         self.set_layout()
@@ -66,5 +69,7 @@ class EditWorkdayWindow(tk.Toplevel):
         self.btn_save.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
         self.btn_cancel.grid(row=0, column=1, sticky='nsew', padx=5, pady=5)
 
-    def close_window(self):
+    def on_save(self):
+        self.updated_data.update({'start_time': f'{self.ent_start_time_hrs.get()}:{self.ent_start_time_mins.get()}:00'})
+        self.updated_data.update({'duration': float(self.ent_duration.get())})
         self.destroy()
