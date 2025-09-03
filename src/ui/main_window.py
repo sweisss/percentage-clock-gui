@@ -21,6 +21,7 @@ class MainWindow(tk.Tk):
         self.style.theme_use('winnative')
         self.title(f'{kwargs.get('app_name')} v{kwargs.get('app_version')}')
         # self.iconbitmap(self, ICON_FILE)
+        self.attributes('-topmost', True)
 
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=0)

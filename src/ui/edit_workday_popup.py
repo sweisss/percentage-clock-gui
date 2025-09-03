@@ -18,6 +18,7 @@ class EditWorkdayWindow(tk.Toplevel):
         self.resizable(False, False)
         self.grab_set()
         # self.iconbitmap(ICON_FILE)
+        self.attributes('-topmost', True)
 
         # Frames
         self.frm_entries = tk.Frame(master=self)
