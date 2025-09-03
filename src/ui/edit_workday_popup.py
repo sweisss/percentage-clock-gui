@@ -4,6 +4,12 @@ Popup window to edit the details of the workday.
 import tkinter as tk
 
 
+def validate_digits(string):
+    is_digit =  string.isdigit() or string == ''
+    is_len = len(string) <= 2
+    return is_digit and is_len
+
+
 class EditWorkdayWindow(tk.Toplevel):
     def __init__(self, geometry, **kwargs):
         super().__init__(**kwargs)
@@ -23,9 +29,25 @@ class EditWorkdayWindow(tk.Toplevel):
         self.lbl_duration_title = tk.Label(master=self.frm_entries, text='Duration (hrs)')
 
         # Entries
-        self.ent_start_time_hrs = tk.Entry(master=self.frm_entries, justify=tk.RIGHT, width=3)
-        self.ent_start_time_mins = tk.Entry(master=self.frm_entries, width=3)
-        self.ent_duration = tk.Entry(master=self.frm_entries, width=3)
+        validation = self.register(validate_digits)
+        self.ent_start_time_hrs = tk.Entry(
+            master=self.frm_entries,
+            justify=tk.RIGHT, width=3,
+            validate='key',
+            validatecommand=(validation, '%P')
+        )
+        self.ent_start_time_mins = tk.Entry(
+            master=self.frm_entries,
+            width=3,
+            validate='key',
+            validatecommand=(validation, '%P')
+        )
+        self.ent_duration = tk.Entry(
+            master=self.frm_entries,
+            width=3,
+            validate='key',
+            validatecommand=(validation, '%P')
+        )
 
         # Buttons
         self.btn_save = tk.Button(
@@ -76,8 +98,11 @@ class EditWorkdayWindow(tk.Toplevel):
 
     def on_save(self):
         try:
-            self.updated_data.update({'start_time': f'{self.ent_start_time_hrs.get()}:{self.ent_start_time_mins.get()}:00'})
-            self.updated_data.update({'duration': float(self.ent_duration.get())})
+            start_time = self.ent_start_time_hrs.get() if self.ent_start_time_hrs.get() else '00'
+            end_time = self.ent_start_time_mins.get() if self.ent_start_time_mins.get() else '00'
+            duration = float(self.ent_duration.get()) if self.ent_duration.get() else 0.5
+            self.updated_data.update({'start_time': f'{start_time}:{end_time}:00'})
+            self.updated_data.update({'duration': duration})
             self.destroy()
         except ValueError as e:
             self.updated_data.clear()
