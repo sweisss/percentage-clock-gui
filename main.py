@@ -15,7 +15,7 @@ SHIFT_LEN = 8
 class App:
     def __init__(self):
         shift_start = sys.argv[1] if len(sys.argv) >= 2 else SHIFT_START
-        shift_len = int(sys.argv[2]) if len(sys.argv) == 3 else SHIFT_LEN
+        shift_len = float(sys.argv[2]) if len(sys.argv) == 3 else SHIFT_LEN
 
         self.main_window = MainWindow(
             app_name=APP_NAME,
