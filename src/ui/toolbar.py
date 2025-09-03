@@ -8,11 +8,13 @@ class Toolbar(tk.Menu):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.main_window = self.master
+
         # Menus
-        self.menu_file = tk.Menu(self.master, tearoff=0)
-        self.menu_edit = tk.Menu(self.master, tearoff=0)
-        self.menu_view = tk.Menu(self.master, tearoff=0)
-        self.menu_help = tk.Menu(self.master, tearoff=0)
+        self.menu_file = tk.Menu(self.main_window, tearoff=0)
+        self.menu_edit = tk.Menu(self.main_window, tearoff=0)
+        self.menu_view = tk.Menu(self.main_window, tearoff=0)
+        self.menu_help = tk.Menu(self.main_window, tearoff=0)
 
         self.set_menus()
 
@@ -23,18 +25,18 @@ class Toolbar(tk.Menu):
     def set_edit_menu(self):
         self.add_cascade(label='Edit', menu=self.menu_edit)
         self.menu_edit.add_command(
-            label='Nothing here yet',
+            label='Edit Work Day',
             command=lambda: print('No Edit command yet')
         )
 
     def hide_toolbar(self):
-        self.master.config(menu='')
-        self.master.show_expand_toolbar_button()
+        self.main_window.config(menu='')
+        self.main_window.show_expand_toolbar_button()
 
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
         self.menu_view.add_cascade(
-            label='Hide toolbar',
+            label='Hide Toolbar',
             command=self.hide_toolbar
         )
 
