@@ -63,9 +63,13 @@ class MainWindow(tk.Tk):
         self.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
     def show_toolbar(self):
+        self.btn_expand_toolbar.grid_forget()
         self.config(menu=self.toolbar)
 
-    def run(self):
+    def show_expand_toolbar_button(self):
         self.btn_expand_toolbar.grid(row=0, column=0, sticky='nw', padx=(0, 0), pady=(0, 0))
+
+    def run(self):
+        self.show_expand_toolbar_button()
         self.main_frame.grid(row=1, column=0, sticky='nsew', padx=(5, 5), pady=(0, 0))
         self.mainloop()
