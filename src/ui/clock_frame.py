@@ -79,7 +79,7 @@ class ClockFrame(tk.Frame):
         return end_dt.strftime(DATETIME_FORMAT)
 
     def set_layout(self):
-        self.frm_percent_of_total_day.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
+        self.frm_percent_of_total_day.grid(row=0, column=0, sticky='nsew', padx=5, pady=(0, 5))
         self.frm_percent_of_work_day.grid(row=1, column=0, sticky='nsew', padx=5, pady=5)
 
     def update_time_percentage(self):

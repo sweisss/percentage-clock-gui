@@ -50,7 +50,8 @@ class MainWindow(tk.Tk):
             master=self,
             shift_start=kwargs.get('shift_start'),
             shift_len=kwargs.get('shift_len'),
-            # background='black'
+            borderwidth=0,
+            background='black'
         )
 
     def set_window_geometry(self):

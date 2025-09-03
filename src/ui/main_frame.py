@@ -11,9 +11,15 @@ class MainFrame(tk.Frame):
         super().__init__(**kwargs)
 
         # Frames
-        self.frm_clock = ClockFrame(master=self, shift_start=shift_start, shift_len=shift_len)
+        self.frm_clock = ClockFrame(
+            master=self,
+            shift_start=shift_start,
+            shift_len=shift_len,
+            borderwidth=0,
+            # background='red'
+        )
 
         self.set_layout()
 
     def set_layout(self):
-        self.frm_clock.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
+        self.frm_clock.grid(row=0, column=0, sticky='nsew', padx=0, pady=0)
