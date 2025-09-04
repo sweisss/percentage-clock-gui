@@ -4,9 +4,16 @@ Popup window to edit the details of the workday.
 import tkinter as tk
 
 
-def validate_digits(string):
+def validate_time_digits(string):
     is_digit =  string.isdigit() or string == ''
     is_len = len(string) <= 2
+    return is_digit and is_len
+
+
+def validate_duration_digits(string):
+    is_decimal = '.' in string
+    is_len = len(string) <= 3 if is_decimal else len(string) <= 2
+    is_digit =  string.replace('.', '').isdigit() or string.replace('.', '') == ''
     return is_digit and is_len
 
 
@@ -30,24 +37,25 @@ class EditWorkdayWindow(tk.Toplevel):
         self.lbl_duration_title = tk.Label(master=self.frm_entries, text='Duration (hrs)')
 
         # Entries
-        validation = self.register(validate_digits)
+        time_validation = self.register(validate_time_digits)
+        duration_validation = self.register(validate_duration_digits)
         self.ent_start_time_hrs = tk.Entry(
             master=self.frm_entries,
             justify=tk.RIGHT, width=3,
             validate='key',
-            validatecommand=(validation, '%P')
+            validatecommand=(time_validation, '%P')
         )
         self.ent_start_time_mins = tk.Entry(
             master=self.frm_entries,
             width=3,
             validate='key',
-            validatecommand=(validation, '%P')
+            validatecommand=(time_validation, '%P')
         )
         self.ent_duration = tk.Entry(
             master=self.frm_entries,
             width=3,
             validate='key',
-            validatecommand=(validation, '%P')
+            validatecommand=(duration_validation, '%P')
         )
 
         # Buttons
@@ -101,7 +109,7 @@ class EditWorkdayWindow(tk.Toplevel):
         try:
             start_time = self.ent_start_time_hrs.get() if self.ent_start_time_hrs.get() else '00'
             end_time = self.ent_start_time_mins.get() if self.ent_start_time_mins.get() else '00'
-            duration = float(self.ent_duration.get()) if self.ent_duration.get() else 0.5
+            duration = float(self.ent_duration.get()) if float(self.ent_duration.get()) else 0.5
             self.updated_data.update({'start_time': f'{start_time}:{end_time}:00'})
             self.updated_data.update({'duration': duration})
             self.destroy()
