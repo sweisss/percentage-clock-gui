@@ -43,12 +43,19 @@ class Toolbar(tk.Menu):
             command=self.open_edit_workday_popup
         )
 
+    def toggle_topview(self):
+        self.main_window.toggle_on_top()
+
     def hide_toolbar(self):
         self.main_window.config(menu='')
         self.main_window.show_expand_toolbar_button()
 
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
+        self.menu_view.add_cascade(
+            label='Toggle Always On Top',
+            command=self.toggle_topview
+        )
         self.menu_view.add_cascade(
             label='Hide Toolbar',
             command=self.hide_toolbar

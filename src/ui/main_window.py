@@ -21,7 +21,8 @@ class MainWindow(tk.Tk):
         self.style.theme_use('winnative')
         self.title(f'{kwargs.get('app_name')} v{kwargs.get('app_version')}')
         # self.iconbitmap(self, ICON_FILE)
-        self.attributes('-topmost', True)
+        self.always_on_top = True
+        self.attributes('-topmost', self.always_on_top)
 
         self.columnconfigure(0, weight=1)
         self.columnconfigure(1, weight=0)
@@ -73,6 +74,11 @@ class MainWindow(tk.Tk):
 
     def update_workday(self, shift_start, shift_len):
         self.frm_main.frm_clock.update_workday(shift_start=shift_start, shift_len=shift_len)
+
+    def toggle_on_top(self):
+        self.always_on_top = not self.always_on_top
+        self.attributes('-topmost', self.always_on_top)
+        self.update()
 
     def run(self):
         self.show_expand_toolbar_button()
