@@ -28,10 +28,12 @@ class Toolbar(tk.Menu):
 
         self.set_menus()
 
+    ###### File Menu ######
     def set_file_menu(self):
         self.add_cascade(label='File', menu=self.menu_file)
         self.menu_file.add_command(label='Exit', command=self.quit)
 
+    ###### Edit Menu ######
     def on_edit_window_close(self, event):
         if event.widget == event.widget.winfo_toplevel():
             if event.widget.updated_data:
@@ -51,6 +53,7 @@ class Toolbar(tk.Menu):
             command=self.open_edit_workday_popup
         )
 
+    ###### View Menu ######
     def toggle_topview(self):
         self.main_window.toggle_on_top()
         toggled = self.toggle_indicator if self.main_window.always_on_top else ''
@@ -72,6 +75,7 @@ class Toolbar(tk.Menu):
             command=self.hide_toolbar
         )
 
+    ###### Help Menu ######
     def set_help_menu(self):
         self.add_cascade(label='Help', menu=self.menu_help)
         self.menu_help.add_command(
@@ -83,6 +87,7 @@ class Toolbar(tk.Menu):
             command=lambda: print('No User Guide command yet')
         )
 
+    ###### Set Menus ######
     def set_menus(self):
         self.set_file_menu()
         self.set_edit_menu()
