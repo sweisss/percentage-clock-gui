@@ -18,6 +18,14 @@ class Toolbar(tk.Menu):
         self.menu_view = tk.Menu(self.main_window, tearoff=0)
         self.menu_help = tk.Menu(self.main_window, tearoff=0)
 
+        # Labels
+        self.toggle_indicator = '  ✔️'
+        self.always_on_top_base = 'Toggle Always On Top'
+        self.lbl_always_on_top = tk.StringVar(
+            master=self.menu_view,
+            value=self.always_on_top_base + self.toggle_indicator
+        )
+
         self.set_menus()
 
     def set_file_menu(self):
@@ -45,6 +53,9 @@ class Toolbar(tk.Menu):
 
     def toggle_topview(self):
         self.main_window.toggle_on_top()
+        toggled = self.toggle_indicator if self.main_window.always_on_top else ''
+        self.lbl_always_on_top.set(self.always_on_top_base + toggled)
+        self.menu_view.entryconfig(0, label=self.lbl_always_on_top.get())
 
     def hide_toolbar(self):
         self.main_window.config(menu='')
@@ -53,7 +64,7 @@ class Toolbar(tk.Menu):
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
         self.menu_view.add_cascade(
-            label='Toggle Always On Top',
+            label=self.lbl_always_on_top.get(),
             command=self.toggle_topview
         )
         self.menu_view.add_cascade(
