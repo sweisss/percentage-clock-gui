@@ -58,7 +58,7 @@ class Toolbar(tk.Menu):
         self.main_window.toggle_on_top()
         toggled = self.toggle_indicator if self.main_window.always_on_top else ''
         self.lbl_always_on_top.set(self.always_on_top_base + toggled)
-        self.menu_view.entryconfig(0, label=self.lbl_always_on_top.get())
+        self.menu_view.entryconfig(1, label=self.lbl_always_on_top.get())
 
     def hide_toolbar(self):
         self.main_window.config(menu='')
@@ -67,12 +67,12 @@ class Toolbar(tk.Menu):
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
         self.menu_view.add_cascade(
-            label=self.lbl_always_on_top.get(),
-            command=self.toggle_topview
-        )
-        self.menu_view.add_cascade(
             label='Hide Toolbar',
             command=self.hide_toolbar
+        )
+        self.menu_view.add_cascade(
+            label=self.lbl_always_on_top.get(),
+            command=self.toggle_topview
         )
 
     ###### Help Menu ######
