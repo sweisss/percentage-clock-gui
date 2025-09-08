@@ -12,13 +12,22 @@ from src.ui.toolbar import Toolbar
 STARTING_WINDOW_WIDTH = 550
 STARTING_WINDOW_HEIGHT = 170
 
+# https://note.nkmk.me/en/python-platform-system-release-version/
+THEMES = {
+    'Windows': 'winnative',
+    'Darwin': 'aqua'
+}
+
 
 class MainWindow(tk.Tk):
     def __init__(self, **kwargs):
         super().__init__()
 
         self.style = ttk.Style()
-        self.style.theme_use('winnative')
+        pltfrm = kwargs.get('pltfrm')
+        # print(f'DEBUG: {pltfrm = }; {THEMES.get(pltfrm) = }')
+        self.style.theme_use(THEMES.get(pltfrm))
+
         self.title(f'{kwargs.get('app_name')} v{kwargs.get('app_version')}')
         # self.iconbitmap(self, ICON_FILE)
         self.always_on_top = True
