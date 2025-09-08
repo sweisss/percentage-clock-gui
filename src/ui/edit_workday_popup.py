@@ -12,7 +12,7 @@ def validate_time_digits(string):
 
 def validate_duration_digits(string):
     is_decimal = '.' in string
-    is_len = len(string) <= 3 if is_decimal else len(string) <= 2
+    is_len = len(string) <= 5 if is_decimal else len(string) <= 2
     is_digit =  string.replace('.', '').isdigit() or string.replace('.', '') == ''
     return is_digit and is_len
 
@@ -53,7 +53,7 @@ class EditWorkdayWindow(tk.Toplevel):
         )
         self.ent_duration = tk.Entry(
             master=self.frm_entries,
-            width=3,
+            width=5,
             validate='key',
             validatecommand=(duration_validation, '%P')
         )
