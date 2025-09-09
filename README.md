@@ -13,7 +13,7 @@ which can be expanded by pressing the "+" button at the top-left of the GUI.
 The GUI defaults to "Always On Top" which keeps it above all other windows.
 This feature can be toggled in the "View" menu of the toolbar.
 
-This program was made only with features of the python base library and therefore has no external dependencies and
+This program was made only with features of the python standard library and therefore has no external dependencies and
 is not packaged as an executable. To run the program, clone this repo to the directory of choice,
 `cd` into the top level of the project, and enter:
 ```commandline
