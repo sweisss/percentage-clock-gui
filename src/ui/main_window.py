@@ -52,7 +52,7 @@ class MainWindow(tk.Tk):
         # Expand button
         self.btn_expand_toolbar = tk.Button(
             master=self,
-            text=self.button_options[self.toolbar_hidden],
+            text=self.get_button_label(),
             width=0,
             height=0,
             compound='center',
@@ -80,9 +80,12 @@ class MainWindow(tk.Tk):
         y = (screen_height / 2) - (height / 2)
         self.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
+    def get_button_label(self):
+        return self.button_options[self.toolbar_hidden]
+
     def toggle_toolbar(self):
         self.toolbar_hidden = not self.toolbar_hidden
-        self.btn_expand_toolbar.configure(text=self.button_options[self.toolbar_hidden])
+        self.btn_expand_toolbar.configure(text=self.get_button_label())
         if self.toolbar_hidden:
             self.config(menu='')
         else:
