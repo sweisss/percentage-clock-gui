@@ -18,7 +18,7 @@ def validate_duration_digits(string):
 
 
 class EditWorkdayWindow(tk.Toplevel):
-    def __init__(self, geometry, **kwargs):
+    def __init__(self, geometry, shift_start, shift_len, **kwargs):
         super().__init__(**kwargs)
 
         self.title('Edit Work Day')
@@ -26,6 +26,8 @@ class EditWorkdayWindow(tk.Toplevel):
         self.grab_set()
         # self.iconbitmap(ICON_FILE)
         self.attributes('-topmost', self.master.always_on_top)
+
+        self.shift_start, self.shift_len = shift_start, shift_len
 
         # Frames
         self.frm_entries = tk.Frame(master=self)
@@ -75,6 +77,7 @@ class EditWorkdayWindow(tk.Toplevel):
 
         self.set_window_geometry(main_window_geometry=geometry)
         self.set_layout()
+        self.insert_default_entries()
         self.bind('<Return>', lambda e: self.on_save())
 
     def set_window_geometry(self, main_window_geometry=None, width=350, height=100):
@@ -100,6 +103,13 @@ class EditWorkdayWindow(tk.Toplevel):
         self.frm_buttons.grid(row=1, column=0, sticky='nsew', padx=5, pady=5)
         self.btn_save.grid(row=0, column=0, sticky='nsew', padx=5, pady=5)
         self.btn_cancel.grid(row=0, column=1, sticky='nsew', padx=5, pady=5)
+
+    def insert_default_entries(self):
+        hrs = self.shift_start.split(':')[0]
+        mins = self.shift_start.split(':')[1]
+        self.ent_start_time_hrs.insert(tk.END, hrs)
+        self.ent_start_time_mins.insert(tk.END, mins)
+        self.ent_duration.insert(tk.END, self.shift_len)
 
     def on_cancel(self):
         self.updated_data.clear()

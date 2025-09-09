@@ -43,7 +43,11 @@ class Toolbar(tk.Menu):
                 )
 
     def open_edit_workday_popup(self):
-        edit_workday_window = EditWorkdayWindow(geometry=self.main_window.winfo_geometry())
+        edit_workday_window = EditWorkdayWindow(
+            geometry=self.main_window.winfo_geometry(),
+            shift_start=self.main_window.shift_start,
+            shift_len=self.main_window.shift_len
+        )
         edit_workday_window.bind('<Destroy>', self.on_edit_window_close)
 
     def set_edit_menu(self):

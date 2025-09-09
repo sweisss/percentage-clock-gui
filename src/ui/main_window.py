@@ -40,6 +40,9 @@ class MainWindow(tk.Tk):
         self.window_height = STARTING_WINDOW_HEIGHT
         self.set_window_geometry()
 
+        self.shift_start = kwargs.get('shift_start')
+        self.shift_len = kwargs.get('shift_len')
+
         # Toolbar
         self.toolbar = Toolbar(master=self)
 
@@ -59,8 +62,8 @@ class MainWindow(tk.Tk):
         # Main frame
         self.frm_main = MainFrame(
             master=self,
-            shift_start=kwargs.get('shift_start'),
-            shift_len=kwargs.get('shift_len'),
+            shift_start=self.shift_start,
+            shift_len=self.shift_len,
             borderwidth=0,
             # background='black'
         )
@@ -82,6 +85,7 @@ class MainWindow(tk.Tk):
         self.btn_expand_toolbar.grid(row=0, column=0, sticky='nw', padx=(0, 0), pady=(0, 0))
 
     def update_workday(self, shift_start, shift_len):
+        self.shift_start, self.shift_len = shift_start, shift_len
         self.frm_main.frm_clock.update_workday(shift_start=shift_start, shift_len=shift_len)
 
     def toggle_on_top(self):
