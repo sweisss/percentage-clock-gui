@@ -9,7 +9,7 @@ from src.ui.toolbar import Toolbar
 
 
 # ICON_FILE = ...
-STARTING_WINDOW_WIDTH = 550
+STARTING_WINDOW_WIDTH = 510
 STARTING_WINDOW_HEIGHT = 170
 
 # https://note.nkmk.me/en/python-platform-system-release-version/
