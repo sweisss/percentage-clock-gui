@@ -1,7 +1,8 @@
 # Percentage Clock
 A simple desktop GUI to display the current time as a percentage throught the day.
 
-<img width="555" height="207" alt="image" src="https://github.com/user-attachments/assets/11ae1337-0349-4908-a32e-56e66bfee871" />
+<img width="558" height="211" alt="image" src="https://github.com/user-attachments/assets/4a951bc7-53f5-46ba-a0eb-b01357df8589" />
+
 
 The clock displays the current time as a percentage of two different time ranges:
 - Total Day - Starting and ending at midnight
