@@ -66,7 +66,7 @@ class Toolbar(tk.Menu):
 
     def hide_toolbar(self):
         self.main_window.config(menu='')
-        self.main_window.show_expand_toolbar_button()
+        self.main_window.toggle_toolbar()
 
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)

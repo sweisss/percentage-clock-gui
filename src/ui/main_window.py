@@ -43,20 +43,23 @@ class MainWindow(tk.Tk):
         self.shift_start = kwargs.get('shift_start')
         self.shift_len = kwargs.get('shift_len')
 
+        self.toolbar_hidden = True
+        self.button_options = {True: '+', False: '-'}
+
         # Toolbar
         self.toolbar = Toolbar(master=self)
 
         # Expand button
         self.btn_expand_toolbar = tk.Button(
             master=self,
-            text='+',
+            text=self.button_options[self.toolbar_hidden],
             width=0,
             height=0,
             compound='center',
             padx=0,
             pady=0,
             borderwidth=0,
-            command=self.show_toolbar
+            command=self.toggle_toolbar
         )
 
         # Main frame
@@ -77,7 +80,18 @@ class MainWindow(tk.Tk):
         y = (screen_height / 2) - (height / 2)
         self.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
+    def toggle_toolbar(self):
+        self.toolbar_hidden = not self.toolbar_hidden
+        self.btn_expand_toolbar.configure(text=self.button_options[self.toolbar_hidden])
+        if self.toolbar_hidden:
+            self.config(menu='')
+        else:
+            self.config(menu=self.toolbar)
+
     def show_toolbar(self):
+        """
+        DEPRECATED
+        """
         self.btn_expand_toolbar.grid_forget()
         self.config(menu=self.toolbar)
 
