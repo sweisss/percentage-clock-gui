@@ -32,6 +32,18 @@ ABOUT_MSG = ('This app is written in python 3.12.3 under the MIT licence.\n'
             'OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE'
             'SOFTWARE.')
 
+USAGE = ('To edit the Work Day time range:\n'
+          '- Click on Edit > Edit Work Day\n'
+          '- Enter a starting time and a shift duration\n'
+         '\n'
+         'To toggle the "Always On Top" feature:\n'
+         '- Click on View > Toggle Always On Top\n'
+         '\n'
+         'To hide the toolbar:\n'
+         '- Click on View > Hide Toolbar\n'
+         '- Alternatively, click on the "-" button\n'
+         '- Click on the "+" button to show the toolbar again')
+
 
 class Toolbar(tk.Menu):
     def __init__(self, **kwargs):
@@ -113,6 +125,12 @@ class Toolbar(tk.Menu):
             message=ABOUT_MSG,
         )
 
+    def display_usage(self):
+        messagebox.showinfo(
+            title='Usage',
+            message=USAGE
+        )
+
     def set_help_menu(self):
         self.add_cascade(label='Help', menu=self.menu_help)
         self.menu_help.add_command(
@@ -120,8 +138,8 @@ class Toolbar(tk.Menu):
             command=self.display_about_message,
         )
         self.menu_help.add_command(
-            label='User Guide',
-            command=lambda: print('No User Guide command yet')
+            label='Usage',
+            command=self.display_usage
         )
 
     ###### Set Menus ######
