@@ -1,5 +1,5 @@
 # Percentage Clock
-A simple desktop GUI to display the current time as a percentage throught the day.
+A simple desktop GUI to display the current time as a percentage of the day.
 
 <img width="515" height="207" alt="image" src="https://github.com/user-attachments/assets/935e1200-42e7-4249-ac3d-960968067dbf" />
 
