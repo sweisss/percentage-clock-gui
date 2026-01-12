@@ -55,6 +55,7 @@ class Toolbar(tk.Menu):
         self.menu_file = tk.Menu(self.main_window, tearoff=0)
         self.menu_edit = tk.Menu(self.main_window, tearoff=0)
         self.menu_view = tk.Menu(self.main_window, tearoff=0)
+        self.menu_alpha = tk.Menu(self.main_window, tearoff=0)
         self.menu_help = tk.Menu(self.main_window, tearoff=0)
 
         # Labels
@@ -107,15 +108,25 @@ class Toolbar(tk.Menu):
         self.main_window.config(menu='')
         self.main_window.toggle_toolbar()
 
+    def set_alpha_options(self):
+        for i in range(10, 110, 10):
+            alpha = i / 100
+            self.menu_alpha.add_command(label=str(i), command=lambda a=alpha: self.main_window.wm_attributes('-alpha', a))
+
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
         self.menu_view.add_cascade(
-            label='Hide Toolbar',
-            command=self.hide_toolbar
+            label='Transparency',
+            menu=self.menu_alpha,
         )
+        self.set_alpha_options()
         self.menu_view.add_cascade(
             label=self.lbl_always_on_top.get(),
             command=self.toggle_topview
+        )
+        self.menu_view.add_cascade(
+            label='Hide Toolbar',
+            command=self.hide_toolbar
         )
 
     ###### Help Menu ######
