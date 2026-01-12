@@ -10,6 +10,11 @@ def validate_time_digits(string):
     return is_digit and is_len
 
 
+def add_buffer_mins(mins):
+    mins = mins + '0' if len(mins) == 1 else mins
+    return mins
+
+
 def validate_duration_digits(string):
     is_decimal = '.' in string
     is_len = len(string) <= 5 if is_decimal else len(string) <= 2
@@ -117,10 +122,10 @@ class EditWorkdayWindow(tk.Toplevel):
 
     def on_save(self):
         try:
-            start_time = self.ent_start_time_hrs.get() if self.ent_start_time_hrs.get() else '00'
-            end_time = self.ent_start_time_mins.get() if self.ent_start_time_mins.get() else '00'
+            start_time_hrs = self.ent_start_time_hrs.get() if self.ent_start_time_hrs.get() else '00'
+            start_time_mins = add_buffer_mins(self.ent_start_time_mins.get()) if self.ent_start_time_mins.get() else '00'
             duration = float(self.ent_duration.get()) if float(self.ent_duration.get()) else 0.5
-            self.updated_data.update({'start_time': f'{start_time}:{end_time}:00'})
+            self.updated_data.update({'start_time': f'{start_time_hrs}:{start_time_mins}:00'})
             self.updated_data.update({'duration': duration})
             self.destroy()
         except ValueError as e:
