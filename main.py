@@ -8,7 +8,7 @@ from src.ui.main_window import MainWindow
 
 
 APP_NAME = 'Percentage Clock'
-APP_VERSION = '2.4'
+APP_VERSION = '2.6'
 SHIFT_START = '6:40:00'
 SHIFT_LEN = 10
 
