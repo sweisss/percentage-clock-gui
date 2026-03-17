@@ -36,6 +36,10 @@ USAGE = ('To edit the Work Day time range:\n'
           '- Click on Edit > Edit Work Day\n'
           '- Enter a starting time and a shift duration\n'
          '\n'
+         'To change the transparency of the window:\n'
+         '- Click on View > Alpha Compositing\n'
+         '- An alpha value of 10 will be 90% transparent, while an alpha of 100 will be fully opaque\n'
+         '\n'
          'To toggle the "Always On Top" feature:\n'
          '- Click on View > Toggle Always On Top\n'
          '\n'
@@ -116,7 +120,7 @@ class Toolbar(tk.Menu):
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
         self.menu_view.add_cascade(
-            label='Transparency',
+            label='Alpha Compositing',
             menu=self.menu_alpha,
         )
         self.set_alpha_options()
