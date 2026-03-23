@@ -70,6 +70,8 @@ class Toolbar(tk.Menu):
             value=self.always_on_top_base + self.toggle_indicator
         )
 
+        self.alpha = 1
+
         self.set_menus()
 
     ###### File Menu ######
@@ -112,10 +114,17 @@ class Toolbar(tk.Menu):
         self.main_window.config(menu='')
         self.main_window.toggle_toolbar()
 
+    def set_alpha(self, alpha):
+        self.alpha = alpha
+        self.main_window.wm_attributes('-alpha', alpha)
+        self.set_alpha_options()
+
     def set_alpha_options(self):
+        self.menu_alpha.delete(0, tk.END)
         for i in range(10, 110, 10):
             alpha = i / 100
-            self.menu_alpha.add_command(label=str(i), command=lambda a=alpha: self.main_window.wm_attributes('-alpha', a))
+            lbl = f'{i}  •' if alpha == self.alpha else i
+            self.menu_alpha.add_command(label=str(lbl), command=lambda a=alpha: self.set_alpha(a))
 
     def set_view_menu(self):
         self.add_cascade(label='View', menu=self.menu_view)
