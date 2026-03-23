@@ -123,7 +123,7 @@ class Toolbar(tk.Menu):
         self.menu_alpha.delete(0, tk.END)
         for i in range(10, 110, 10):
             alpha = i / 100
-            lbl = f'{i}  •' if alpha == self.alpha else i
+            lbl = f'{alpha}  •' if alpha == self.alpha else alpha
             self.menu_alpha.add_command(label=str(lbl), command=lambda a=alpha: self.set_alpha(a))
 
     def set_view_menu(self):
